@@ -1,6 +1,14 @@
 {
-  "installCommand": "npm install --legacy-peer-deps",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/ticketapp",
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/ticketapp"
+      }
+    }
+  ],
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
   "framework": "angular"
 }
