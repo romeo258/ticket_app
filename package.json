@@ -19,7 +19,7 @@
     "@angular/router": "^19.2.0",
     "@auth0/angular-jwt": "^5.2.0",
     "@ngneat/dialog": "^5.1.2",
-    "@ngneat/overview": "^6.1.2",
+    "@ngneat/overview": "^6.1.1",
     "@ngrx/operators": "^19.2.1",
     "@ngrx/signals": "^19.2.1",
     "@ngxpert/hot-toast": "^4.2.0",
