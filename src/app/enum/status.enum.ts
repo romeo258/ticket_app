@@ -1,0 +1,11 @@
+export enum Status {
+    NEW = 'NEW',
+    IN_PROGRESS = 'IN PROGRESS',
+    IN_REVIEW = 'IN REVIEW',
+    COMPLETED = 'COMPLETED',
+    IMPEDED = 'IMPEDED',
+    ASSIGNED = 'ASSIGNED',
+    UNASSIGNED = 'UNASSIGNED',
+    CLOSED = 'CLOSED',
+    PENDING = 'PENDING'
+}

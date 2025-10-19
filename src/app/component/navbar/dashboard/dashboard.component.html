@@ -1,0 +1,240 @@
+@if (store?.allTickets()?.length > 0) {
+   <div class="container mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+         <div class="flex flex-col bg-blue-100 border shadow-sm rounded-xl">
+            <div class="p-4 md:p-5 flex justify-between gap-x-3">
+               <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-800 font-extrabold">
+                     TOTAL TICKETS
+                  </p>
+                  <div class="mt-1 flex items-center gap-x-2">
+                     <h3 class="text-xl sm:text-2xl font-extrabold text-gray-800">
+                        {{store?.allTickets()?.length}}
+                     </h3>
+                  </div>
+               </div>
+               <div class="shrink-0 flex justify-center items-center size-[46px] bg-blue-600 text-white rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                  </svg>
+               </div>
+            </div>
+            <a routerLink="/reports" class="py-3 px-4 md:px-5 inline-flex justify-between items-center text-sm text-gray-600 border-t border-gray-400 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 rounded-b-xl">
+               Go to report
+               <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6" />
+               </svg>
+            </a>
+         </div>
+         <div class="flex flex-col bg-green-100 border shadow-sm rounded-xl">
+            <div class="p-4 md:p-5 flex justify-between gap-x-3">
+               <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-800 font-extrabold">
+                     COMPLETED
+                  </p>
+                  <div class="mt-1 flex items-center gap-x-2">
+                     <h3 class="text-xl sm:text-2xl font-extrabold text-gray-800">
+                        {{store?.allTickets()| DataValue: ['status', 'COMPLETED']}}
+                     </h3>
+                  </div>
+               </div>
+               <div class="shrink-0 flex justify-center items-center size-[46px] bg-green-600 text-white rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                  </svg>
+               </div>
+            </div>
+            <a routerLink="/reports" class="py-3 px-4 md:px-5 inline-flex justify-between items-center text-sm text-gray-600 border-t border-gray-400 hover:bg-green-200 focus:outline-none focus:bg-green-200 rounded-b-xl">
+               Go to report
+               <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6" />
+               </svg>
+            </a>
+         </div>
+         <div class="flex flex-col bg-cyan-100 border shadow-sm rounded-xl  ">
+            <div class="p-4 md:p-5 flex justify-between gap-x-3">
+               <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-800 font-extrabold">
+                     IN PROGRESS
+                  </p>
+                  <div class="mt-1 flex items-center gap-x-2">
+                     <h3 class="text-xl sm:text-2xl font-extrabold text-gray-800">
+                        {{store?.allTickets()| DataValue: ['status', 'IN PROGRESS']}}
+                     </h3>
+                  </div>
+               </div>
+               <div
+                  class="shrink-0 flex justify-center items-center size-[46px] bg-cyan-500 text-white rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                  </svg>
+               </div>
+            </div>
+            <a routerLink="/reports" class="py-3 px-4 md:px-5 inline-flex justify-between items-center text-sm text-gray-600 border-t border-gray-400 hover:bg-cyan-200 focus:outline-none focus:bg-cyan-200 rounded-b-xl">
+               Go to report
+               <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6" />
+               </svg>
+            </a>
+         </div>
+         <div class="flex flex-col bg-red-100 border shadow-sm rounded-xl  ">
+            <div class="p-4 md:p-5 flex justify-between gap-x-3">
+               <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-800 font-extrabold">
+                     IMPEDED
+                  </p>
+                  <div class="mt-1 inline-flex items-center gap-x-2">
+                     <h3 class="text-xl sm:text-2xl font-extrabold text-gray-800">
+                        {{store?.allTickets()| DataValue: ['status', 'IMPEDED']}}
+                     </h3>
+                  </div>
+               </div>
+               <div class="shrink-0 flex justify-center items-center size-[46px] bg-red-500 text-white rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                  </svg>
+               </div>
+            </div>
+            <a routerLink="/reports" class="py-3 px-4 md:px-5 inline-flex justify-between items-center text-sm text-gray-600 border-t border-gray-400 hover:bg-red-200 focus:outline-none focus:bg-red-200 rounded-b-xl">
+               Go to report
+               <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6" />
+               </svg>
+            </a>
+         </div>
+      </div>
+      <div class="mt-7 grid grid-cols-1 gap-y-12 gap-x-6 lg:grid-cols-2">
+         <div class="rounded-xl bg-white border border-gray-200">
+            <div id="pieChart">
+               <apx-chart
+               [series]="store?.allTickets() | DataValue: ['count']"
+               [chart]="pieChartOptions.chart"
+               [labels]="store?.allTickets() | LabelValue: ['count']"
+               [legend]="pieChartOptions.legend"
+               [responsive]="pieChartOptions.responsive"
+               ></apx-chart>
+            </div>
+            <div class="p-6 border-t border-blue-gray-50 px-6 py-5">
+               <div class="antialiased font-sans text-sm leading-normal flex items-center font-normal text-blue-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                  </svg>
+                  &nbsp;Hover on each data slice for more details
+               </div>
+            </div>
+         </div>
+         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white border border-blue-gray-100 shadow-sm">
+            <div class="relative bg-clip-border mx-4 rounded-xl overflow-hidden bg-white text-gray-700">
+               <div id="donutChart">
+                  <apx-chart
+                  [series]="store?.allTickets() | DataValue: ['type']"
+                  [chart]="donutChartOptions.chart"
+                  [labels]="store?.allTickets() | LabelValue: ['type']"
+                  [legend]="donutChartOptions.legend"
+                  [dataLabels]="donutChartOptions.dataLabels"
+                  [tooltip]="donutChartOptions.tooltip"
+                  ></apx-chart>
+               </div>
+            </div>
+            <div class="p-6 border-t border-blue-gray-50 px-6 py-5">
+               <div class="antialiased font-sans text-sm leading-normal flex items-center font-normal text-blue-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                  </svg>
+                  &nbsp;Hover on each data slice for more details
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="mt-7 p-5 rounded-xl bg-white border border-gray-200">
+         <h6 class="text-base font-semibold text-blue-gray-900">
+            Ticket Trends Weekly
+         </h6>
+         <div id="linechart">
+            <apx-chart
+            [series]="store?.allTickets() | DataValue: ['line']"
+            [chart]="lineChartOptions.chart"
+            [xaxis]="store?.allTickets() | LabelValue: ['line']"
+            [dataLabels]="lineChartOptions.dataLabels"
+            [grid]="lineChartOptions.grid"
+            [stroke]="lineChartOptions.stroke"
+            [title]="lineChartOptions.title"
+            ></apx-chart>
+         </div>
+      </div>
+      <div class="mt-7 grid grid-cols-1 gap-6 xl:grid-cols-3">
+         <div class=" flex flex-col bg-clip-border rounded-xl bg-white overflow-hidden xl:col-span-2 border border-blue-gray-100 shadow-sm">
+            <div class=" bg-clip-border rounded-xl overflow-hidden bg-transparent shadow-none m-0 flex items-center justify-between p-6">
+               <h6 class="text-base font-semibold text-blue-gray-900">
+                  Ticket by Status
+               </h6>
+            </div>
+            <div class="p-6 pb-2">
+               <div id="columnChart">
+                  <apx-chart
+                  [series]="store?.allTickets() | DataValue: []"
+                  [chart]="columnChartOptions.chart"
+                  [dataLabels]="columnChartOptions.dataLabels"
+                  [plotOptions]="columnChartOptions.plotOptions"
+                  [yaxis]="columnChartOptions.yaxis"
+                  [xaxis]="store?.allTickets() | LabelValue: []"
+                  [fill]="columnChartOptions.fill"
+                  [title]="columnChartOptions.title"
+                  ></apx-chart>
+               </div>
+            </div>
+         </div>
+         <div class="flex flex-col rounded-xl bg-white p-6 text-gray-700 border border-blue-gray-100">
+            <div class="rounded-xl text-gray-700">
+               <h6 class="text-base font-semibold text-blue-gray-900">
+                  Oldest Open Tickets
+               </h6>
+               <div class="mx-auto mt-2 mb-2 border-t border-gray-200"></div>
+            </div>
+            <div class="w-full">
+               @for (ticket of (store?.allTickets() | DataValue: ['sortByDate']) | slice: 0 : 9; track ticket.ticketUuid) {
+               <div [routerLink]="['/tickets/', ticket.ticketUuid]" class="flex items-center justify-between mb-1.5 py-2 px-1.5 border border-gray-300 rounded-md cursor-pointer">
+                  <div class="flex items-start gap-1">
+                     <div class="bg-gray-300 p-1 rounded-full text-[#0a365e]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                           stroke="currentColor" class="size-6">
+                           <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+                        </svg>
+                     </div>
+                     <div>
+                        <p class="antialiased font-sans text-sm leading-normal text-blue-gray-900 font-medium">
+                           Ticket #{{ticket.ticketUuid.toUpperCase().split('-')[4]}}
+                        </p>
+                        <span class="block antialiased font-sans text-xs font-medium text-blue-gray-500">
+                        Since {{ticket.createdAt.getTime().toString() | date: 'mediumDate'}}
+                        </span>
+                     </div>
+                  </div>
+                  <span [ngClass]="[ticket.status === 'COMPLETED' ? 'bg-green-600' : '',
+                     ticket.status === 'NEW' ? 'bg-yellow-400' : '',
+                     ticket.status === 'IN PROGRESS' ? 'bg-green-400' : '',
+                     ticket.status === 'IN REVIEW' ? 'bg-sky-500' : '',
+                     ticket.status === 'CLOSED' ? 'bg-red-700' : '',
+                     ticket.status === 'PENDING' ? 'bg-orange-400' : '',
+                     ticket.status === 'ASSIGNED' ? 'bg-blue-600' : '',
+                     ticket.status === 'UNASSIGNED' ? 'bg-yellow-600' : '',
+                     ticket.status === 'IMPEDED' ? 'bg-red-500' : '']"
+                     class="px-1 py-0.5 text-[10px] align-middle text-white font-bold rounded-md">
+                  {{ ticket.status }}
+                  </span>
+               </div>
+               }
+            </div>
+         </div>
+      </div>
+   </div>
+   }

@@ -1,0 +1,29 @@
+    <nav class="bg-gray-900 fixed w-full top-0 left-0 z-40">
+        <div class="container h-16 mx-auto">
+            <div class="h-16 flex items-center justify-between">
+                <div class="flex flex-1 items-center justify-left sm:items-stretch sm:justify-start">
+                    <div [routerLink]="['/']" class="flex-shrink-0 items-center cursor-pointer">
+                        <img class="h-8 w-auto" src="https://cdn-icons-png.flaticon.com/512/9732/9732800.png" alt="Ticket App">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://localhost:3000&code_challenge_method=S256&code_challenge=zazFAVHE9Voq8MhBAbe7R8IqQ78K_EM8eGLwwDSeXec" class="hover:bg-gray-700 p-2.5 text-white hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center sm:mr-3">
+                        Login
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke="currentColor" class="shrink-0 size-4"><path d="m15 4.5 7.5 7.5-7.5 7.5" /></svg>
+                    </a>
+                    <a [routerLink]="['register']" [routerLinkActive]="['bg-gray-700']" class="hover:bg-gray-700 p-1 text-white font-medium rounded-lg hidden text-sm px-5 py-2.5 text-center sm:inline-flex items-center lg:mr-3">
+                        Register
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke="currentColor" class="shrink-0 size-4"><path d="m15 4.5 7.5 7.5-7.5 7.5" /></svg>
+                    </a>
+                    <a [routerLink]="['resetpassword']" [routerLinkActive]="['bg-gray-700']" class="hover:bg-gray-700 p-1 text-white font-medium rounded-lg hidden text-sm px-5 py-2.5 text-center lg:inline-flex items-center mr-3">
+                        Reset Password
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke="currentColor" class="shrink-0 size-4"><path d="m15 4.5 7.5 7.5-7.5 7.5" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mt-12">
+        <router-outlet/>
+    </div>

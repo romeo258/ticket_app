@@ -1,0 +1,123 @@
+<div class="container mx-auto pt-10">
+    <div class="mt-4 flex flex-col items-center">
+        <img class="size-20 rounded-md bg-gray-400 p-3" src="https://cdn-icons-png.flaticon.com/512/9732/9732800.png"
+            alt="Your Company" width="80" height="80">
+        <h2 class="mt-5 text-xl font-semibold text-gray-800">Create a new account</h2>
+    </div>
+    <div class="mt-4 flex flex-col items-center mx-auto max-w-[500px]">
+        <div class="p-4 rounded-lg border bg-white w-full">
+            @if (state()?.message) {
+            <div class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50">
+                <p class="text-sm font-medium">{{state()?.message}}</p>
+                <button (click)="closeMessage()" type="button"
+                    class="ms-auto -mx-1.5 -my-1.5 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8"
+                    aria-label="Close">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            }
+            @if (state()?.error) {
+            <div class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50">
+                <p class="text-sm font-medium">{{state()?.error}}</p>
+                <button (click)="closeMessage()" type="button"
+                    class="ms-auto -mx-1.5 -my-1.5 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
+                    aria-label="Close">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            }
+            <form #form="ngForm" (ngSubmit)="register(form)" class="">
+                <div class="space-y-6">
+                    <div>
+                        <label for="firstName" class="mb-2 text-sm font-medium text-gray-800">First name</label>
+                        <input type="text" ngModel #firstName="ngModel" name="firstName" id="firstName"
+                            placeholder="First name" required [disabled]="state()?.loading"
+                            class="border text-gray-900 text-sm rounded-lg w-full p-2.5"
+                            [ngClass]="[(firstName.touched && firstName.dirty && firstName.invalid) ? 'outline-red-500 bg-red-100' : '']" />
+                        @if (firstName.touched && firstName.dirty && firstName.invalid) {
+                        <div class="mt-2 font-normal text-red-500">First name is required</div>
+                        }
+                    </div>
+                    <div>
+                        <label for="lastName" class="mb-2 text-sm font-medium text-gray-800">Last name</label>
+                        <input tpe="text" ngModel #lastName="ngModel" name="lastName" id="lastName"
+                            placeholder="Last name" required [disabled]="state()?.loading"
+                            class="border text-gray-900 text-sm rounded-lg w-full p-2.5"
+                            [ngClass]="[(lastName.touched && lastName.dirty && lastName.invalid) ? 'outline-red-500 bg-red-100' : '']" />
+                        @if (lastName.touched && lastName.dirty && lastName.invalid) {
+                        <div class="mt-2 font-normal text-red-500">Last name is required</div>
+                        }
+                    </div>
+                    <div>
+                        <label for="email" class="mb-2 text-sm font-medium text-gray-800">Email address</label>
+                        <input type="email" ngModel #email="ngModel" name="email" id="email" placeholder="Email address"
+                            required [disabled]="state()?.loading" email
+                            class="border text-gray-900 text-sm rounded-lg w-full p-2.5"
+                            [ngClass]="[(email.touched && email.dirty && email.invalid) ? 'outline-red-500 bg-red-100' : '']" />
+                        @if (email.touched && email.dirty && email.invalid && email.errors['required']) {
+                        <div class="mt-2 font-normal text-red-500">Email is required</div>
+                        }
+                        @if (email.touched && email.dirty && email.invalid && email.errors['email']) {
+                        <div class="mt-2 font-normal text-red-500">Email format is invalid</div>
+                        }
+                    </div>
+                    <div>
+                        <label for="username" class="mb-2 text-sm font-medium text-gray-800">Username</label>
+                        <input type="text" ngModel #username="ngModel" name="username" id="username"
+                            placeholder="Username" required pattern="^[a-zA-Z0-9]+$" [disabled]="state()?.loading"
+                            minlength="4" class="border text-gray-900 text-sm rounded-lg w-full p-2.5"
+                            [ngClass]="[(username.touched && username.dirty && username.invalid) ? 'outline-red-500 bg-red-100' : '']" />
+                        @if (username.touched && username.dirty && username.invalid && username.errors['required']) {
+                        <div class="mt-2 font-normal text-red-500">Username is required</div>
+                        }
+                        @if (username.touched && username.dirty && username.invalid && username.errors['pattern']) {
+                        <div class="mt-2 font-normal text-red-500">Username can only have letters and numbers</div>
+                        }
+                    </div>
+                    <div>
+                        <label for="password" class="mb-2 text-sm font-medium text-gray-800">Password</label>
+                        <input type="password" ngModel #password="ngModel" name="password" id="password"
+                            placeholder="••••••••" password minlength="6"
+                            class="border text-gray-800 text-sm rounded-lg w-full p-2.5"
+                            [ngClass]="[(password.touched && password.dirty && password.invalid) ? 'outline-red-500 bg-red-100' : '']"
+                            required [disabled]="state()?.loading" />
+                        @if (password.touched && password.dirty && password.invalid && password.errors['required']) {
+                        <div class="mt-2 font-normal text-red-500">Password is required</div>
+                        }
+                        @if (password.touched && password.dirty && password.invalid && password.errors['minlength']) {
+                        <div class="mt-2 font-normal text-red-500">Password is too short</div>
+                        }
+                    </div>
+                    <button type="submit" [disabled]="form.invalid || state()?.loading"
+                        class="disabled:bg-gray-300 w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
+                        account</button>
+                </div>
+            </form>
+            <div class="mt-4">
+                <a href="http://localhost:3000/resetpassword"
+                    class="mt-4 text-base text-blue-600 hover:underline">Forgot Password?</a>
+                <div class="mt-3 flex items-center justify-between">
+                    <a href="http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://localhost:3000&code_challenge_method=S256&code_challenge=zazFAVHE9Voq8MhBAbe7R8IqQ78K_EM8eGLwwDSeXec"
+                        class="bg-blue-600 hover:bg-blue-700 p-2 rounded-md text-white text-sm">Log In</a>
+                    <a [routerLink]="['/']"
+                        class="inline-flex justify-center items-center bg-blue-600 hover:bg-blue-700 p-2 rounded-md text-white text-sm">
+                        Back to home
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" width="24" height="24"
+                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                            stroke="currentColor" class="shrink-0 size-4">
+                            <path d="m15 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

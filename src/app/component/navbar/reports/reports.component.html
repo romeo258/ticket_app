@@ -1,0 +1,142 @@
+<div class="container mx-auto">
+   <div class="flex flex-wrap justify-between items-center space-y-5 md:space-y-0">
+      <a (click)="goBack()" class="bg-gray-300 p-1 rounded-full cursor-pointer">
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+         </svg>
+      </a>
+      <h3 class="text-xl font-bold text-black rounded-md px-2">
+         Reports
+      </h3>
+   </div>
+   <div class="mx-auto mt-3 mb-3 border-t border-gray-200"></div>
+</div>
+<div class="container mx-auto">
+   <form #reportForm="ngForm" (ngSubmit)="report(reportForm)" class="flex justify-between items-center flex-wrap xl:flex-nowrap gap-1.5">
+   <div class="relative w-full status">
+      <button (click)="toggleMenu(Menu.STATUS)" class="w-full text-gray-800 border border-gray-300 bg-white hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center" type="button">
+      Status &darr;
+      </button>
+      <div [ngClass]="[isStatusMenuOpen() ? 'transition ease-out duration-300 transform visible opacity-100 scale-100': 'invisible transition ease-in duration-75 transform opacity-0 scale-95']" class="absolute top-10 z-10 w-48 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow">
+         <ul class="p-3 space-y-3 text-sm text-gray-700">
+            @for (status of ['NEW', 'IN PROGRESS', 'IN REVIEW', 'COMPLETED', 'IMPEDED', 'ASSIGNED', 'UNASSIGNED', 'CLOSED', 'PENDING']; track status) {
+            <li>
+               <div class="flex items-center">
+                  <input [name]="status" [id]="status" ngModel type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label [for]="status" class="ms-2 text-sm font-medium text-gray-900 w-full">{{status}}</label>
+               </div>
+            </li>
+            }
+         </ul>
+      </div>
+   </div>
+   <div class="relative w-full type">
+      <button (click)="toggleMenu(Menu.TYPE)" class="w-full text-gray-800 border border-gray-300 bg-white hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center" type="button">
+      Type &darr;
+      </button>
+      <div [ngClass]="[isTypeMenuOpen() ? 'transition ease-out duration-300 transform visible opacity-100 scale-100': 'invisible transition ease-in duration-75 transform opacity-0 scale-95']" class="absolute top-10 z-10 w-48 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow">
+         <ul class="p-3 space-y-3 text-sm text-gray-700">
+            @for (type of ['BUG', 'DEFECT', 'INCIDENT', 'ENHANCEMENT', 'DESIGN']; track type) {
+            <li>
+               <div class="flex items-center">
+                  <input [name]="type" [id]="type" ngModel type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+                  <label [for]="type" class="ms-2 text-sm font-medium text-gray-900 w-full">{{type}}</label>
+               </div>
+            </li>
+            }
+         </ul>
+      </div>
+   </div>
+   <div class="relative w-full priority">
+      <button (click)="toggleMenu(Menu.PRIORITY)" class="w-full text-gray-800 border border-gray-300 bg-white hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center" type="button">
+      Priority &darr;
+      </button>
+      <div [ngClass]="[isPriorityMenuOpen() ? 'transition ease-out duration-300 transform visible opacity-100 scale-100': 'invisible transition ease-in duration-75 transform opacity-0 scale-95']" class="absolute top-10 z-10 w-48 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow">
+         <ul class="p-3 space-y-3 text-sm text-gray-700">
+            @for (priority of ['LOW', 'MEDIUM', 'HIGH']; track priority) {
+            <li>
+               <div class="flex items-center">
+                  <input [name]="priority" [id]="priority" ngModel type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+                  <label [for]="priority" class="ms-2 text-sm font-medium text-gray-900 w-full">{{priority}}</label>
+               </div>
+            </li>
+            }
+         </ul>
+      </div>
+   </div>
+   <input (click)="closeMenu()" type="search" name="title" ngModel placeholder="Search ticket title" class="w-full min-w-60 rounded-md border-0 px-2 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400">
+   <input (click)="closeMenu()" type="date" name="fromDate" ngModel class="w-full min-w-60 rounded-md border-0 px-2 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400">
+   <input (click)="closeMenu()" type="date" name="toDate" ngModel class="w-full min-w-60 rounded-md border-0 px-2 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400">
+   <button (click)="closeMenu()" type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-xs p-2">
+        Search
+   </button>
+   </form>
+</div>
+<div class="mt-6 container mx-auto" id="report">
+   <div class="bg-white rounded-lg p-6 border border-solid border-gray-200">
+      <div class="flex flex-wrap justify-between items-center md:flex-nowrap">
+         <h3 class="text-xl font-bold">Tickets {{ store?.report() == null ? '(0)' : '(' + store?.report()?.length + ')' }}</h3>
+         <div class="flex flex-wrap md:flex-nowrap justify-between items-center space-x-0 md:space-x-4 space-y-2 md:space-y-0">
+            <button (click)="downloadPDF()" [disabled]="store?.reportRequest() === undefined" type="button" class="disabled:bg-gray-300 text-white bg-red-800 hover:bg-red-900 font-medium rounded-lg text-xs p-2">
+               Download PDF
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-3 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+            </button>
+         </div>
+      </div>
+      <div class="mx-auto mt-3 mb-3 border-t border-gray-200"></div>
+      @if (store?.report()?.length > 0) {
+      @for (ticket of store?.report(); track ticket.ticketId) {
+      <div [routerLink]="['/tickets/', ticket.ticketUuid]" class="bg-white cursor-pointer rounded-xl p-0.5 border border-solid border-gray-200 mb-2">
+         <div class="p-4">
+            <div class="flex flex-col items-start justify-between gap-y-6 md:flex-row md:items-center">
+               <div class="basis-1/5">
+                  <p class="text-base font-bold">Ticket #{{ticket.ticketUuid.toUpperCase().split('-')[4]}}</p>
+                  <p class="text-sm m-0 text-gray-500 font-normal">Since: {{ticket.createdAt | date: 'mediumDate'}}</p>
+               </div>
+               <div class="basis-1/5 pl-2 border-gray-300 border-l">
+                  <p class="text-base font-bold">Title</p>
+                  <p class="text-sm text-gray-500 font-normal line-clamp-1">{{ticket.title}}</p>
+               </div>
+               <div class="basis-1/5 pl-2 border-gray-300 border-l">
+                  <p class="text-base font-bold">Description</p>
+                  <p class="text-sm text-gray-500 font-normal line-clamp-1">{{ticket.description}}</p>
+               </div>
+               <div class="basis-1/5 pl-2 border-gray-300 border-l">
+                  <p class="text-base font-bold">Due Date</p>
+                  <p class="text-sm text-gray-500 font-normal">{{ticket.dueDate | date: 'mediumDate'}}</p>
+               </div>
+               <div class="basis-1/5 pl-2 border-gray-300 border-l flex items-center justify-between">
+                  <span [ngClass]="[
+                     ticket.type === 'ENHANCEMENT' ? 'bg-cyan-300' : '',
+                     ticket.type === 'INCIDENT' ? 'bg-yellow-400' : '',
+                     ticket.type === 'DEFECT' ? 'bg-red-400' : '',
+                     ticket.type === 'DESIGN' ? 'bg-sky-500' : '',
+                     ticket.type === 'BUG' ? 'bg-red-600' : '']"
+                     class="px-1 py-0.5 text-[10px] align-middle text-white font-bold rounded-md">
+                  {{ticket.type}}</span>
+                  <span [ngClass]="[ticket.priority === 'LOW' ? 'bg-green-600' : '',
+                     ticket.priority === 'MEDIUM' ? 'bg-yellow-400' : '',
+                     ticket.priority === 'HIGH' ? 'bg-green-400' : '']"
+                     class="px-1 py-0.5 text-[10px] align-middle text-white font-bold rounded-md ml-2">
+                  {{ ticket.priority }}
+                  </span>
+                  <span [ngClass]="[ticket.status === 'COMPLETED' ? 'bg-green-600' : '',
+                     ticket.status === 'NEW' ? 'bg-yellow-400' : '',
+                     ticket.status === 'IN PROGRESS' ? 'bg-green-400' : '',
+                     ticket.status === 'IN REVIEW' ? 'bg-sky-500' : '',
+                     ticket.status === 'CLOSED' ? 'bg-red-700' : '',
+                     ticket.status === 'PENDING' ? 'bg-orange-400' : '',
+                     ticket.status === 'ASSIGNED' ? 'bg-blue-600' : '',
+                     ticket.status === 'UNASSIGNED' ? 'bg-yellow-600' : '',
+                     ticket.status === 'IMPEDED' ? 'bg-red-500' : '']"
+                     class="px-1 py-0.5 text-[10px] align-middle text-white font-bold rounded-md ml-2">
+                  {{ ticket.status }}
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+      }
+      }
+   </div>
+</div>
